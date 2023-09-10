@@ -1,6 +1,6 @@
-## AEW (Advanced English Writing)
+## CASIO India
 
-This application will be use as a backend application of AEW (Advanced English Writing). This service aims to make students interested in English & optimize their creative writing skills. The service is completely human-centric to help improve students’ self-learning skills & personal motivation for creative writing ability.
+This application will be use as a backend application of CASIO LMS. This service aims to serve students to learn CASIO calculator functionality. There will be some courses according to the calculator operation. Any one can see the video to learn.
 
 ## Contributor
 
@@ -9,10 +9,9 @@ This application will be use as a backend application of AEW (Advanced English W
 ## Features
 
 - Master Settings
-- Expert Management
+- Course Information
 - Student Management
-- Admin Management
-- Package 
-- Syllebus
-- Topic
-- Correction
+- Store Location
+- Register a Shop 
+- Login (Student & Shop Owner)
+- Registration (Student & Shop Owner)
