@@ -29,7 +29,7 @@ class CreateTopicsTable extends Migration
             $table->string('youtube_url')->nullable();
             $table->text('download_url')->nullable();
             $table->string('thumbnail')->nullable();
-            $table->string('duration')->nullable();
+            $table->float('duration')->default(0.00);
             $table->float('rating')->default(0.00);
             $table->integer('sequence')->default(0);
             $table->boolean('is_active')->default(1);

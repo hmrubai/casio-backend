@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class ClassInformation extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        "name",
+        "name_bn",
+        "description",
+        "description_bn",
+        "created_by",
+        "thumbnail",
+        "is_active"
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean'
+    ];
 }
