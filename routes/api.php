@@ -9,6 +9,9 @@ use App\Http\Controllers\ClassInformationController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\QueryController;
 
 
 Route::post('/auth/register', [AuthController::class, 'registerUser']);
@@ -30,7 +33,6 @@ Route::group(['prefix' => 'open'], function(){
     //Class
     Route::get('class-list', [ClassInformationController::class, 'getClassList']);
 
-
     //Chapter
     Route::get('chapter-list', [ChapterController::class, 'getChapterList']);
     Route::get('chapter-list-by-id/{class_id}', [ChapterController::class, 'getChapterListByClassID']);
@@ -38,10 +40,22 @@ Route::group(['prefix' => 'open'], function(){
     //Topic
     Route::get('topic-list', [TopicController::class, 'getTopicList']);
     Route::post('filter-topic-list', [TopicController::class, 'getTopicListByFilter']);
+    Route::post('search-topic', [TopicController::class, 'searchTopicList']);
 
     //Store
     Route::get('store-list', [ShopController::class, 'getStoreList']);
 
+    //Notification 
+    Route::get('notification-list', [NotificationController::class, 'getNotificationList']);
+
+    //FAQ
+    Route::get('faq-list', [FaqController::class, 'getFAQList']);
+
+    //Submit Query
+    Route::middleware('throttle:submitQuery')->group(function () {
+        Route::post('submit-query', [QueryController::class, 'saveQuery']);
+    });
+    
 });
 
 Route::post('trancate-data', [MasterSettingsController::class, 'trancateData']);

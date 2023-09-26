@@ -38,7 +38,25 @@ class TopicController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Chapter List Successful!',
+            'message' => 'Topic List Successful!',
+            'data' => $topics
+        ], 200);
+    }
+
+    public function searchTopicList(Request $request)
+    {
+        $text = $request->text ? $request->text : null;
+
+        $topics = Topic::select('topics.*')
+        ->where('topics.title', 'LIKE', '%'.$text.'%')
+        ->orWhere('topics.description', 'LIKE', '%'.$text.'%')
+        ->orderBy('topics.title', 'ASC')
+        ->limit(5)
+        ->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Topic List Successful!',
             'data' => $topics
         ], 200);
     }
