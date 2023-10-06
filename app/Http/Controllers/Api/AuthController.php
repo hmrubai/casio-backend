@@ -109,7 +109,7 @@ class AuthController extends Controller
             }
 
             Log::debug('An informational message.');
-            Log::channel('#testing')->info('Something happened!');
+            // Log::channel('#testing')->info('Something happened!');
 
             $user = User::where('email', $request->email)->first();
 

@@ -26,6 +26,13 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('get-profile', [AuthController::class, 'getProfile']);
     Route::post('profile-update', [AuthController::class, 'updateUser']);
 
+    Route::group(['prefix' => 'admin'], function(){
+        //Class
+        Route::get('class-list', [ClassInformationController::class, 'getAllClassList']);
+        Route::post('class-save-or-update', [ClassInformationController::class, 'saveOrUpdateClass']);
+        Route::post('class-delete', [ClassInformationController::class, 'deleteClassInformation']);
+    });
+
 });
 
 Route::group(['prefix' => 'open'], function(){
