@@ -31,6 +31,10 @@ Route::middleware('auth:sanctum')->group( function () {
         Route::get('class-list', [ClassInformationController::class, 'getAllClassList']);
         Route::post('class-save-or-update', [ClassInformationController::class, 'saveOrUpdateClass']);
         Route::post('class-delete', [ClassInformationController::class, 'deleteClassInformation']);
+
+        //Chapter 
+        Route::get('chapter-list', [ChapterController::class, 'getChapterList']);
+        Route::get('chapter-list-by-id/{class_id}', [ChapterController::class, 'getChapterListByClassID']);
     });
 
 });
