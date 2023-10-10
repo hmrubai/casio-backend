@@ -41,6 +41,14 @@ Route::middleware(['auth:sanctum'])->group( function () {
 
         //Notification 
         Route::get('notification-list', [NotificationController::class, 'getNotificationList']);
+        Route::post('notification-save-or-update', [NotificationController::class, 'saveOrUpdateNotification']);
+        Route::post('notification-delete', [NotificationController::class, 'deleteNotification']);
+
+        //Topic 
+        Route::get('topic-list', [TopicController::class, 'getTopicList']);
+        Route::post('topic-save-or-update', [TopicController::class, 'saveOrUpdateTopic']);
+        Route::post('topic-delete', [TopicController::class, 'deleteTopic']);
+
     });
 
 });
