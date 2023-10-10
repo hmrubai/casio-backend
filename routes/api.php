@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MasterSettingsController;
 use App\Http\Controllers\ClassInformationController;
 use App\Http\Controllers\ChapterController;
@@ -49,6 +50,14 @@ Route::middleware(['auth:sanctum'])->group( function () {
         Route::post('topic-save-or-update', [TopicController::class, 'saveOrUpdateTopic']);
         Route::post('topic-delete', [TopicController::class, 'deleteTopic']);
 
+        //Dashboard
+        Route::get('dashboard-summary', [DashboardController::class, 'getDashbaordSummary']);
+
+        //Store
+        Route::get('store-list', [ShopController::class, 'getStoreList']);
+
+        //FAQ
+        Route::get('faq-list', [FaqController::class, 'getFAQList']);
     });
 
 });
