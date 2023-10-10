@@ -108,7 +108,7 @@ class TopicController extends Controller
                 ], 200);
 
             } else {
-                $isExist = Topic::where('name', $request_param->name)->where('class_id', $request_param->class_id)->first();
+                $isExist = Topic::where('title', $request_param->title)->where('class_id', $request_param->class_id)->first();
                 if (empty($isExist)) {
                     Topic::create([
                         "title" => $request_param->title,
@@ -164,13 +164,13 @@ class TopicController extends Controller
             ], 400);
         }
 
-        $chapter = Topic::where('id', $request->id)->first();
+        $topic = Topic::where('id', $request->id)->first();
 
-        if($chapter->thumbnail){
-            unlink($chapter->thumbnail);
+        if($topic->thumbnail){
+            unlink($topic->thumbnail);
         }
 
-        $chapter->delete();
+        $topic->delete();
 
         return response()->json([
             'status' => true,

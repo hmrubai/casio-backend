@@ -56,6 +56,9 @@ Route::middleware(['auth:sanctum'])->group( function () {
         //Store
         Route::get('store-list', [ShopController::class, 'getStoreList']);
 
+        //Query
+        Route::get('query-list', [QueryController::class, 'getQueryList']);
+
         //FAQ
         Route::get('faq-list', [FaqController::class, 'getFAQList']);
     });

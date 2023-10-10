@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\DB;
 
 class QueryController extends Controller
 {
+    public function getQueryList(Request $request)
+    {
+        $query = QueryInformation::orderBy('id', 'DESC')->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Query List Successful!',
+            'data' => $query
+        ], 200);
+    }
+
     public function saveQuery (Request $request)
     {
         if(!$request->name){
