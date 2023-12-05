@@ -12,8 +12,8 @@ class ChapterController extends Controller
 {
     public function getChapterList(Request $request)
     {
-        $chapter = Chapter::select('chapters.*', 'class_information.name as class_name')
-        ->leftJoin('class_information', 'class_information.id', 'chapters.class_id')
+        $chapter = Chapter::select('chapters.*')
+        // ->leftJoin('class_information', 'class_information.id', 'chapters.class_id')
         ->orderBy('chapters.name', 'ASC')
         ->get();
 
@@ -35,8 +35,8 @@ class ChapterController extends Controller
             ], 422);
         }
 
-        $chapter = Chapter::select('chapters.*', 'class_information.name as class_name')
-        ->leftJoin('class_information', 'class_information.id', 'chapters.class_id')
+        $chapter = Chapter::select('chapters.*')
+        // ->leftJoin('class_information', 'class_information.id', 'chapters.class_id')
         ->where('chapters.class_id', $class_id)
         ->orderBy('chapters.name', 'ASC')
         ->get();
@@ -71,7 +71,7 @@ class ChapterController extends Controller
                     "name_bn" => $request_param->name_bn,
                     "description" => $request_param->description,
                     "description_bn" => $request_param->description_bn,
-                    "class_id" => $request_param->class_id,
+                    // "class_id" => $request_param->class_id,
                     "created_by" => $user_id,
                     "thumbnail" => $thumbnail_url,
                     "is_active" => $request_param->is_active
@@ -84,14 +84,14 @@ class ChapterController extends Controller
                 ], 200);
 
             } else {
-                $isExist = Chapter::where('name', $request_param->name)->where('class_id', $request_param->class_id)->first();
+                $isExist = Chapter::where('name', $request_param->name)->first();
                 if (empty($isExist)) {
                     Chapter::create([
                         "name" => $request_param->name,
                         "name_bn" => $request_param->name_bn,
                         "description" => $request_param->description,
                         "description_bn" => $request_param->description_bn,
-                        "class_id" => $request_param->class_id,
+                        // "class_id" => $request_param->class_id,
                         "created_by" => $user_id,
                         "thumbnail" => $thumbnail_url,
                         "is_active" => $request_param->is_active

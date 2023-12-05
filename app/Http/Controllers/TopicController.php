@@ -85,11 +85,11 @@ class TopicController extends Controller
                     "title_bn" => $request_param->title,
                     "description" => $request_param->description,
                     "description_bn" => $request_param->description,
-                    "class_id" => $request_param->class_id,
+                    // "class_id" => $request_param->class_id,
                     "chapter_id" => $request_param->chapter_id,
                     "created_by" => $user_id,
-                    "author_name" => $request_param->author_name,
-                    "author_details" => $request_param->author_details,
+                    // "author_name" => $request_param->author_name,
+                    // "author_details" => $request_param->author_details,
                     "raw_url" => $request_param->raw_url,
                     "s3_url" => $request_param->s3_url,
                     "youtube_url" => $request_param->youtube_url,
@@ -97,29 +97,29 @@ class TopicController extends Controller
                     "thumbnail" => $thumbnail_url,
                     "duration" => $request_param->duration,
                     "rating" => $request_param->rating,
-                    "sequence" => $request_param->sequence,
+                    // "sequence" => $request_param->sequence,
                     "is_active" => $request_param->is_active
                 ]);
 
                 return response()->json([
                     'status' => true,
-                    'message' => 'Topic has been updated successfully',
+                    'message' => 'Video has been updated successfully',
                     'data' => []
                 ], 200);
 
             } else {
-                $isExist = Topic::where('title', $request_param->title)->where('class_id', $request_param->class_id)->first();
+                $isExist = Topic::where('title', $request_param->title)->first();
                 if (empty($isExist)) {
                     Topic::create([
                         "title" => $request_param->title,
                         "title_bn" => $request_param->title,
                         "description" => $request_param->description,
                         "description_bn" => $request_param->description,
-                        "class_id" => $request_param->class_id,
+                        // "class_id" => $request_param->class_id,
                         "chapter_id" => $request_param->chapter_id,
                         "created_by" => $user_id,
-                        "author_name" => $request_param->author_name,
-                        "author_details" => $request_param->author_details,
+                        // "author_name" => $request_param->author_name,
+                        // "author_details" => $request_param->author_details,
                         "raw_url" => $request_param->raw_url,
                         "s3_url" => $request_param->s3_url,
                         "youtube_url" => $request_param->youtube_url,
@@ -127,19 +127,19 @@ class TopicController extends Controller
                         "thumbnail" => $thumbnail_url,
                         "duration" => $request_param->duration,
                         "rating" => $request_param->rating,
-                        "sequence" => $request_param->sequence,
+                        // "sequence" => $request_param->sequence,
                         "is_active" => $request_param->is_active
                     ]);
 
                     return response()->json([
                         'status' => true,
-                        'message' => 'Topic has been created successfully',
+                        'message' => 'Video has been added successfully',
                         'data' => []
                     ], 200);
                 }else{
                     return response()->json([
                         'status' => false,
-                        'message' => 'Topic already Exist!',
+                        'message' => 'Video already Exist!',
                         'data' => []
                     ], 400);
                 }

@@ -14,7 +14,7 @@ class Chapter extends Model
         "name_bn",
         "description",
         "description_bn",
-        "class_id",
+        // "class_id",
         "created_by",
         "thumbnail",
         "is_active"

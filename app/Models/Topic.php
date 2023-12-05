@@ -14,11 +14,11 @@ class Topic extends Model
         "title_bn",
         "description",
         "description_bn",
-        "class_id",
+        // "class_id",
         "chapter_id",
         "created_by",
-        "author_name",
-        "author_details",
+        // "author_name",
+        // "author_details",
         "raw_url",
         "s3_url",
         "youtube_url",
@@ -26,7 +26,7 @@ class Topic extends Model
         "thumbnail",
         "duration",
         "rating",
-        "sequence",
+        // "sequence",
         "is_active"
     ];
 
