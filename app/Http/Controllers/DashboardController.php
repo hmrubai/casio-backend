@@ -17,19 +17,22 @@ class DashboardController extends Controller
     {
         $topic = Topic::all();
         $chapter = Chapter::all();
-        $class_list = ClassInformation::all();
         $notification_count = Notification::get()->count();
         $notifications = Notification::take(3)->orderBy('id', 'DESC')->get();
+        $topic_list = Topic::take(3)->orderBy('id', 'DESC')->get();
+        $chapter_list = Chapter::take(5)->orderBy('id', 'DESC')->get();
         $store = StoreInformation::get()->count();
 
         $response = [
+           'topic_list' => $topic_list,
            'topic_count' => $topic->count(),
+           'chapter_list' => $chapter_list,
            'chapter_count' => $chapter->count(),
-           'class_count' => $class_list->count(),
+           'class_count' => 0,
            'store_count' => $store,
            'notification_count' => $notification_count,
            'top_notification_list' => $notifications,
-           'class_list' => $class_list
+           'class_list' => []
         ];
 
         return response()->json([
