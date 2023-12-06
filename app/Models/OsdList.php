@@ -5,18 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Chapter extends Model
+class OsdList extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        "name",
-        "name_bn",
-        "description",
-        "description_bn",
-        "class_id",
-        "created_by",
-        "thumbnail",
+        "code",
+        "dealer_name",
+        "distributor_name",
+        "division",
+        "asm_rsm_name",
+        "outlet_address",
+        "contact_person",
+        "contact_no",
+        "latitude",
+        "longitude",
         "is_active"
     ];
 

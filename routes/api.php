@@ -55,6 +55,7 @@ Route::middleware(['auth:sanctum'])->group( function () {
 
         //Store
         Route::get('store-list', [ShopController::class, 'getStoreList']);
+        Route::get('osd-list', [ShopController::class, 'getOsdList']);
 
         //Query
         Route::get('query-list', [QueryController::class, 'getQueryList']);
@@ -81,6 +82,7 @@ Route::group(['prefix' => 'open'], function(){
 
     //Store
     Route::get('store-list', [ShopController::class, 'getStoreList']);
+    Route::get('osd-list', [ShopController::class, 'getOsdList']);
 
     //Notification 
     Route::get('notification-list', [NotificationController::class, 'getNotificationList']);
