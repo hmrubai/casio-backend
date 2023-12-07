@@ -49,6 +49,7 @@ Route::middleware(['auth:sanctum'])->group( function () {
         Route::get('topic-list', [TopicController::class, 'getTopicList']);
         Route::post('topic-save-or-update', [TopicController::class, 'saveOrUpdateTopic']);
         Route::post('topic-delete', [TopicController::class, 'deleteTopic']);
+        Route::post('filter-topic-list', [TopicController::class, 'getTopicListByFilter']);
 
         //Dashboard
         Route::get('dashboard-summary', [DashboardController::class, 'getDashbaordSummary']);

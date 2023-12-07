@@ -14,7 +14,7 @@ class Topic extends Model
         "title_bn",
         "description",
         "description_bn",
-        // "class_id",
+        "class_id",
         "chapter_id",
         "created_by",
         // "author_name",

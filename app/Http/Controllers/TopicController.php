@@ -13,7 +13,11 @@ class TopicController extends Controller
 {
     public function getTopicList(Request $request)
     {
-        $topic = Topic::orderBy('title', 'ASC')->get();
+        $topic = Topic::select('topics.*', 'class_information.name as class_name', 'chapters.name as chapter_name')
+            ->leftJoin('class_information', 'class_information.id', 'topics.class_id')
+            ->leftJoin('chapters', 'chapters.id', 'topics.chapter_id')
+            ->orderBy('topics.title', 'ASC')
+            ->get();
 
         return response()->json([
             'status' => true,
@@ -27,15 +31,17 @@ class TopicController extends Controller
         $class_id = $request->class_id ? $request->class_id : 0;
         $chapter_id = $request->chapter_id ? $request->chapter_id : 0;
 
-        $topics = Topic::select('topics.*')
-        ->when($class_id, function ($query, $class_id) {
-            return $query->where('topics.class_id', $class_id);
-        })
-        ->when($chapter_id, function ($query, $chapter_id) {
-            return $query->where('topics.chapter_id', $chapter_id);
-        })
-        ->orderBy('topics.title', 'ASC')
-        ->get();
+        $topics = Topic::select('topics.*', 'class_information.name as class_name', 'chapters.name as chapter_name')
+            ->leftJoin('class_information', 'class_information.id', 'topics.class_id')
+            ->leftJoin('chapters', 'chapters.id', 'topics.chapter_id')
+            ->when($class_id, function ($query, $class_id) {
+                return $query->where('topics.class_id', $class_id);
+            })
+            ->when($chapter_id, function ($query, $chapter_id) {
+                return $query->where('topics.chapter_id', $chapter_id);
+            })
+            ->orderBy('topics.title', 'ASC')
+            ->get();
 
         return response()->json([
             'status' => true,
@@ -48,12 +54,14 @@ class TopicController extends Controller
     {
         $text = $request->text ? $request->text : null;
 
-        $topics = Topic::select('topics.*')
-        ->where('topics.title', 'LIKE', '%'.$text.'%')
-        ->orWhere('topics.description', 'LIKE', '%'.$text.'%')
-        ->orderBy('topics.title', 'ASC')
-        ->limit(5)
-        ->get();
+        $topics = Topic::select('topics.*', 'class_information.name as class_name', 'chapters.name as chapter_name')
+            ->leftJoin('class_information', 'class_information.id', 'topics.class_id')
+            ->leftJoin('chapters', 'chapters.id', 'topics.chapter_id')
+            ->where('topics.title', 'LIKE', '%'.$text.'%')
+            ->orWhere('topics.description', 'LIKE', '%'.$text.'%')
+            ->orderBy('topics.title', 'ASC')
+            ->limit(5)
+            ->get();
 
         return response()->json([
             'status' => true,
@@ -85,7 +93,7 @@ class TopicController extends Controller
                     "title_bn" => $request_param->title,
                     "description" => $request_param->description,
                     "description_bn" => $request_param->description,
-                    // "class_id" => $request_param->class_id,
+                    "class_id" => $request_param->class_id,
                     "chapter_id" => $request_param->chapter_id,
                     "created_by" => $user_id,
                     // "author_name" => $request_param->author_name,
@@ -108,14 +116,14 @@ class TopicController extends Controller
                 ], 200);
 
             } else {
-                $isExist = Topic::where('title', $request_param->title)->first();
+                $isExist = Topic::where('title', $request_param->title)->where('class_id', $request_param->class_id)->where('chapter_id', $request_param->chapter_id)->first();
                 if (empty($isExist)) {
                     Topic::create([
                         "title" => $request_param->title,
                         "title_bn" => $request_param->title,
                         "description" => $request_param->description,
                         "description_bn" => $request_param->description,
-                        // "class_id" => $request_param->class_id,
+                        "class_id" => $request_param->class_id,
                         "chapter_id" => $request_param->chapter_id,
                         "created_by" => $user_id,
                         // "author_name" => $request_param->author_name,
