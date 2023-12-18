@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Models\ManualBook;
 use App\Models\ClassInformation;
 use App\Models\Chapter;
 use Illuminate\Http\Request;
@@ -144,5 +145,50 @@ class ChapterController extends Controller
             'data' => []
         ], 200);
     }
+
+    public function getManual(Request $request)
+    {
+        $manual = ManualBook::get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Manual List!',
+            'data' => $manual
+        ], 200);
+    }
+
+    public function updateManualBook (Request $request)
+    {
+        $request_param = json_decode($request->data);
+
+        $file_url = null;
+        if($request->hasFile('manual')){
+            $book = $request->file('manual');
+            $time = time();
+            $book_file = "CASIO_Manual_Book" . $time . '.' . $book->getClientOriginalExtension();
+            $destination = 'uploads/manual';
+            $book->move($destination, $book_file);
+            $file_url = $destination . '/' . $book_file;
+        }
+
+        ManualBook::where('id', $request_param->id)->update([
+            "title" => $request_param->book_title,
+            "description" => $request_param->description,
+            "is_active" => $request_param->is_active
+        ]);
+
+        if($file_url){
+            ManualBook::where('id', $request_param->id)->update([
+                "file_path" => $file_url
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Manual Book has been updated successfully',
+            'data' => []
+        ], 200);
+    }
+    
 }
 

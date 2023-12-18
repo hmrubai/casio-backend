@@ -51,6 +51,10 @@ Route::middleware(['auth:sanctum'])->group( function () {
         Route::post('topic-delete', [TopicController::class, 'deleteTopic']);
         Route::post('filter-topic-list', [TopicController::class, 'getTopicListByFilter']);
 
+        //Manual Book
+        Route::post('update-manual-book', [ChapterController::class, 'updateManualBook']);
+        Route::get('get-manual', [ChapterController::class, 'getManual']);
+
         //Dashboard
         Route::get('dashboard-summary', [DashboardController::class, 'getDashbaordSummary']);
 
@@ -84,6 +88,9 @@ Route::group(['prefix' => 'open'], function(){
     //Store
     Route::get('store-list', [ShopController::class, 'getStoreList']);
     Route::get('osd-list', [ShopController::class, 'getOsdList']);
+
+    //Manual Book
+    Route::get('get-manual', [ChapterController::class, 'getManual']);
 
     //Notification 
     Route::get('notification-list', [NotificationController::class, 'getNotificationList']);
